@@ -19,7 +19,13 @@ import UIKit
  * `BLTNItemManager` must only be used from the main thread.
  */
 
+public protocol BLTNDelegate: class {
+    func bulletinViewDidDissmised()
+}
+
 @objc public final class BLTNItemManager: NSObject {
+    
+    public weak var delegate: BLTNDelegate?
 
     /// Bulletin view controller.
     fileprivate var bulletinController: BulletinViewController!
@@ -35,7 +41,7 @@ import UIKit
 
     @objc public var backgroundColor: UIColor = {
         if #available(iOS 13.0, *) {
-            return .systemBackground
+            return .tertiarySystemBackground // .secondarySystemGroupedBackground
         } else {
             return .white
         }
@@ -509,6 +515,8 @@ extension BLTNItemManager {
         }
 
         isPrepared = false
+        
+        delegate?.bulletinViewDidDissmised()
 
     }
 
@@ -519,7 +527,7 @@ extension BLTNItemManager {
     @nonobjc func completeDismissal() {
 
         currentItem.onDismiss()
-
+        
         for arrangedSubview in bulletinController.contentStackView.arrangedSubviews {
             bulletinController.contentStackView.removeArrangedSubview(arrangedSubview)
             arrangedSubview.removeFromSuperview()
