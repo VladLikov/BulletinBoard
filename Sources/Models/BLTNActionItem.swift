@@ -98,7 +98,7 @@ import UIKit
      * The code to execute when the action button is tapped.
      */
     
-    @objc public var actionHandler: ((BLTNActionItem) -> Void)?
+    @objc public var actionHandler: ((BLTNActionItem, Any?) -> Void)?
     
     /**
      * The code to execute when the alternative button is tapped.
@@ -115,7 +115,7 @@ import UIKit
     
     @objc(actionButtonTappedWithSender:)
     open func actionButtonTapped(sender: UIButton) {
-        actionHandler?(self)
+        actionHandler?(self, nil)
     }
     
     /**
