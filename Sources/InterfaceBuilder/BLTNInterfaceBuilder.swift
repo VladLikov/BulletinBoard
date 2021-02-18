@@ -66,13 +66,20 @@ import UIKit
      */
 
     @objc open func makeTextField(placeholder: String? = nil,
+                                  text: String? = nil,
                                   returnKey: UIReturnKeyType = .default,
                                   delegate: UITextFieldDelegate? = nil) -> UITextField {
 
         let textField = UITextField()
+        
+        if text != nil {
+            textField.text = text
+        } else {
+            textField.placeholder = placeholder
+        }
+        
         textField.delegate = delegate
-        textField.textAlignment = .left
-        textField.placeholder = placeholder
+        textField.textAlignment = .center
         textField.borderStyle = .roundedRect
         textField.returnKeyType = returnKey
 
