@@ -6,6 +6,7 @@
 import UIKit
 
 /**
+
  * A standard bulletin item with that displays a large action button and a smaller button for alternative options.
  *
  * You do not use this class directly:
